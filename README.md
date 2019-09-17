@@ -8,5 +8,5 @@ some of the parameters and folder structurs will differ.
 # How to use:
 npm i -g
 
-#start the application with:
+start the application with:
 npm start
