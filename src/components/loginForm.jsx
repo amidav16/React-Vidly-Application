@@ -12,11 +12,30 @@ class LoginForm extends Component {
     }
   };
 
+  validateProperty = ({ name, value }) => {
+    //Basic validation and not ideal
+    //replace this later
+    if (name === "username") {
+      if (value.trim() === "") return "Username is required";
+      //could add more validation rules for our username field if we wish
+    }
+    if (name === "password") {
+      if (value.trim() === "") return "Password is required";
+    }
+  };
+
   handleChange = ({ currentTarget: input }) => {
+    //we need to do validation but we dont wanna call validate() cause that will validate the entire form instead of the specific input field for example username.
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    //if errormessage is trucy do this, we will store it into our errors object and set it to the errormessage from our validation function
+    //if not then we should delete the existing error property so the error is cleared up.
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
     //we want to update the state but not directly, we want to clone it and let react update that state
     const account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account });
+    this.setState({ account, errors });
   };
 
   validate = () => {
