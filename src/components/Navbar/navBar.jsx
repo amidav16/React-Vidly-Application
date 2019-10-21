@@ -25,6 +25,7 @@ const NavBar = () => {
               Movies
             </NavLink>
           </li>
+
           <li className="nav-item">
             <NavLink className="nav-link" to="/customers">
               Customers
@@ -35,6 +36,9 @@ const NavBar = () => {
               Rentals
             </NavLink>
           </li>
+          <NavLink className="nav-link" to="/login">
+            Login
+          </NavLink>
         </ul>
       </div>
     </nav>
