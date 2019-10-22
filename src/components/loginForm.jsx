@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 import Input from "./input";
 
 class LoginForm extends Component {
@@ -12,16 +13,27 @@ class LoginForm extends Component {
     }
   };
 
+  schema = {
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password")
+  };
+
   validateProperty = ({ name, value }) => {
-    //Basic validation and not ideal
-    //replace this later
-    if (name === "username") {
-      if (value.trim() === "") return "Username is required";
-      //could add more validation rules for our username field if we wish
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required";
-    }
+    //same approach in validate method, but we only want to validate one input field each
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    //cant validate our current schema cause our schemna takes two properties, so we need to make a sub schema
+    const { error } = Joi.validate(obj, schema);
+
+    return error ? error.details[0].message : null;
+
+    //this code is the same as above
+    //if (error) return null;
+    //return error.details[0].message;
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -39,16 +51,17 @@ class LoginForm extends Component {
   };
 
   validate = () => {
+    const options = { abortEarly: false };
+    const { error } = Joi.validate(this.state.account, this.schema, options);
+    //if theres no errors return null
+    if (!error) return null;
+    //otherwise we have to get the array and map it to an object
+
     const errors = {};
+    //itterate over the array to an object could also use map but might be complicated for people like me
+    for (let item of error.details) errors[item.path[0]] = item.message;
 
-    const { account } = this.state;
-    if (account.username.trim() === "")
-      errors.username = "Username is required.";
-
-    if (account.password.trim() === "")
-      errors.password = "Password is required.";
-
-    return Object.keys(errors).length === 0 ? null : errors;
+    return errors;
   };
 
   handleSubmit = e => {
@@ -86,7 +99,9 @@ class LoginForm extends Component {
             error={errors.password}
           ></Input>
 
-          <button className="btn btn-primary">Login</button>
+          <button disabled={this.validate()} className="btn btn-primary">
+            Login
+          </button>
         </form>
       </div>
     );
