@@ -7,11 +7,7 @@ class RegisterForm extends Form {
     //controlled value cannot be null or unidentified...
     //therefore initiliaze it to an empty string or some value you find from the server
     data: { username: "", password: "", name: "" },
-    errors: {
-      username: "",
-      password: "",
-      name: ""
-    }
+    errors: {}
   };
 
   schema = {

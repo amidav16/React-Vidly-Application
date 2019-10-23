@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NewMovieForm from "./components/newMovieForm";
 import Movies from "./components/movies.jsx";
 import MovieForm from "./components/movieForm.jsx";
 import RegisterForm from "./components/registerForm";
@@ -20,7 +21,9 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
+            <Route path="/movies/new" component={NewMovieForm} />
             <Route path="/movies/:id" component={MovieForm} />
+
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/movies" component={Movies} />
