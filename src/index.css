@@ -20,3 +20,7 @@ code {
 .clickable {
   cursor: pointer;
 }
+
+.form-inline {
+  width: 50px;
+}

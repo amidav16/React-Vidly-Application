@@ -24,9 +24,9 @@ const pages = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
             //in other words the selected page will change to page-item active on click
             className={page === currentPage ? "page-item active" : "page-item"}
           >
-            <li className="page-link" onClick={() => onPageChange(page)}>
+            <p className="page-link" onClick={() => onPageChange(page)}>
               {page}
-            </li>
+            </p>
           </li>
         ))}
       </ul>
