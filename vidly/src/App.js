@@ -5,15 +5,18 @@ import RegisterForm from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import WebsiteNavBar from "../src/components/Navbar/navBar";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import NotFound from "./components/Navbar/notFound";
 import Customers from "./components/Navbar/customers";
 import Rentals from "./components/Navbar/rentals";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <div>
+        <ToastContainer />
         <div className="container">
           <WebsiteNavBar />
 
