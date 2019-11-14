@@ -24,10 +24,10 @@ export function deleteMovie(movieId) {
 //use post in order to add the movie to the database
 export function saveMovie(movie) {
   //check if the id exist and delete the id
-  if (movie.id) {
+  if (movie._id) {
     const body = { ...movie };
     delete body._id;
-    return http.put(movieUrl(movie.id), body);
+    return http.put(movieUrl(movie._id), body);
   }
   //otherwise we are making a new movie
   return http.post(apiEndPoint, movie);

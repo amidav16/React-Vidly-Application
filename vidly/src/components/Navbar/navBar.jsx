@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
@@ -36,12 +36,29 @@ const NavBar = () => {
               Rentals
             </NavLink>
           </li>
-          <NavLink className="nav-link" to="/login">
-            Login
-          </NavLink>
-          <NavLink className="nav-link" to="/register">
-            Register
-          </NavLink>
+
+          {!user && (
+            //conditonal render, if we have no user we will render these!
+            <React.Fragment>
+              <NavLink className="nav-link" to="/login">
+                Login
+              </NavLink>
+              <NavLink className="nav-link" to="/register">
+                Register
+              </NavLink>
+            </React.Fragment>
+          )}
+          {user && (
+            //conditonal render, if we have a user we wanna render these!
+            <React.Fragment>
+              <NavLink className="nav-link" to="/profile">
+                {user.name}
+              </NavLink>
+              <NavLink className="nav-link" to="/logout">
+                Logout
+              </NavLink>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </nav>
