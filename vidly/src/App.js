@@ -10,6 +10,7 @@ import NotFound from "./components/Navbar/notFound";
 import Customers from "./components/Navbar/customers";
 import Rentals from "./components/Navbar/rentals";
 import Logout from "./components/logout.jsx";
+import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -23,20 +24,24 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div>
         <ToastContainer />
         <div className="container">
-          <WebsiteNavBar user={this.state.user} />
+          <WebsiteNavBar user={user} />
 
           <Switch>
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={RegisterForm} />
-            <Route path="/movies/:id" component={MovieForm} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
-            <Route path="/movies" component={Movies} />
+            <ProtectedRoute path="/movies/:id" component={MovieForm} />
+            <Route
+              path="/movies"
+              render={props => <Movies {...props} user={user} />}
+            />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/movies" />
             <Redirect to="not-found" />

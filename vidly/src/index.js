@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import App from "./App";
 
+//process is current process and env is all the env variables, and can be set directly on terminal or from the config file we made!
+console.log("SUPERMAN", process.env.REACT_APP_NAME);
+
 logger.init();
 
 ReactDOM.render(
